@@ -63,6 +63,8 @@ oc login ...
 oc apply -f https://raw.githubusercontent.com/giofontana/redhat-demos/main/rhacm/policies/openshift-gitops-installed.yaml
 ```
 
+*Helpful link*: https://github.com/stolostron/policy-collection
+
 ### Application deployment using GitOps
 
 1. Run the following command to create the GitOpsCluster object
