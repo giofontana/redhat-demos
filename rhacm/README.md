@@ -29,6 +29,11 @@
 
 1. Create a cluster using ACM web interface
 
+### Upgrade a cluster
+
+1. When an upgrade is available you will see the "Upgrade available" link
+
+
 ### Import a cluster
 
 1. Import using ACM web interface
@@ -54,6 +59,7 @@
 3. Create a policy to install openshift-gitops:
 
 ```
+oc login ...
 oc apply -f https://raw.githubusercontent.com/giofontana/redhat-demos/main/rhacm/policies/openshift-gitops-installed.yaml
 ```
 
@@ -66,12 +72,12 @@ oc apply -f https://raw.githubusercontent.com/giofontana/redhat-demos/main/rhacm
 ```
 
 2. From the web app create an ApplicationSet with the following parameters:
-    - Name: sample-app-argo
+    - Name: book-import-argo
     - Argo server: openshift-gitops
     - URL: https://github.com/jnpacker/application-samples/
     - Revision: main
-    - Path: nginx
-    - Remote namespace: nginx-sample-argo
+    - Path: book-import
+    - Remote namespace: book-import
     - Sync policy: leave as-is
     - Placement: env=prod
 
