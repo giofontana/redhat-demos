@@ -1,5 +1,5 @@
 
-# K8s manifests to test Persistent Volume creation from OpenShift Data Foundation StorageClasses
+# K8s manifests to test Persistent Volume creation using OpenShift Data Foundation StorageClasses
 
 1. Change the mysql-cephfd/kustomization.yaml and mysql-cephrbd/kustomization.yaml to reflect your image registry. Example:
 
