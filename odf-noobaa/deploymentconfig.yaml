@@ -19,11 +19,11 @@ spec:
         deploymentconfig: photo-album
     spec:
       containers:
-      - image: quay.io/redhattraining/photo-album
+      - image: quay.io/gfontana/photo-album
         name: photo-album
         env:
           - name: ENDPOINT_URL
-            value: 'https://s3-openshift-storage.{{domain}}'
+            value: 'https://s3.openshift-storage.svc.cluster.local'
           - name: BUCKET_NAME
             valueFrom:
               configMapKeyRef:
@@ -43,14 +43,3 @@ spec:
         - containerPort: 8081
           protocol: TCP
         resources: {}
-  test: false
-  triggers:
-  - type: ConfigChange
-  - imageChangeParams:
-      automatic: true
-      containerNames:
-      - photo-album
-      from:
-        kind: ImageStreamTag
-        name: photo-album:latest
-    type: ImageChange
