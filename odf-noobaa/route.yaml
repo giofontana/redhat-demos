@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: photo-album
+  name: photo-album
+  namespace: demo
+spec:
+  port:
+    targetPort: 80-tcp
+  to:
+    kind: Service
+    name: photo-album
+    weight: 100
+  wildcardPolicy: None

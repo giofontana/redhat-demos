@@ -1,0 +1,56 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: photo-album
+  name: photo-album
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    app: photo-album
+    deploymentconfig: photo-album
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      labels:
+        app: photo-album
+        deploymentconfig: photo-album
+    spec:
+      containers:
+      - image: quay.io/redhattraining/photo-album
+        name: photo-album
+        env:
+          - name: ENDPOINT_URL
+            value: 'https://s3-openshift-storage.{{domain}}'
+          - name: BUCKET_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: photo-album
+                key: BUCKET_NAME
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: photo-album
+                key: AWS_ACCESS_KEY_ID
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: photo-album
+                key: AWS_SECRET_ACCESS_KEY          
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - photo-album
+      from:
+        kind: ImageStreamTag
+        name: photo-album:latest
+    type: ImageChange
