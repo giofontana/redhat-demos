@@ -4,7 +4,7 @@
 1. Run the following command to create the photo album application:
 
 ```
-oc apply -k odf-noobaa/
+oc apply -k .
 ```
 
 2. An Object Bucket Claim will create an S3 bucket automatically for you on Noobaa. Run the following command to get application url:
